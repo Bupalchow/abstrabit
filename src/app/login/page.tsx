@@ -6,10 +6,13 @@ import {GoogleIcon} from "@/components/Svgs";
 export default function LoginPage() {
   const handleLogin = async () => {
     const supabase = createClient();
+
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? window.location.origin;
+
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
+        redirectTo: `${appUrl}/auth/callback`,
       },
     });
   };
